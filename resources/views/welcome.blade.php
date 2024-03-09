@@ -56,7 +56,7 @@
                     <h3>결과</h3>
                     <textarea class="text_area" id="outputText" readonly></textarea>
                     <button class="btn btn-primary mr-3" id="deepLTranslate">
-                        DeepL 번역d
+                        DeepL 번역
                     </button>
                     <button class="btn btn-primary" id="gptTranslate">
                         ChapGpt 번역
