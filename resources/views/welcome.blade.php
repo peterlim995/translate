@@ -71,7 +71,7 @@
                     <textarea class="text_area" id="deepLResult" ></textarea>
                 </div>
                 <div class="col-6">
-                    <h3>한국어 번역 (ChapGPT)</h3>
+                    <h3>한국어 번역 (ChatGPT)</h3>
                     <textarea class="text_area" id="gptResult" ></textarea>
                 </div>
             </div>
