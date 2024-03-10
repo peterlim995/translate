@@ -19,7 +19,7 @@
             margin-top: 10px;
         }
 
-        .loading-feedback {
+        .loading-feedback, .loading-feedback-gpt {
             position: fixed;
             /* 고정 위치 */
             top: 50%;
@@ -36,6 +36,10 @@
 
 <body>
     <div class="loading-feedback">
+        <img src="{{ asset('/images/loading-loading-forever.gif') }}" alt="Loading..."
+            style="width: 30px; height: 30px;" />
+    </div>
+    <div class="loading-feedback-gpt">
         <img src="{{ asset('/images/loading-loading-forever.gif') }}" alt="Loading..."
             style="width: 30px; height: 30px;" />
     </div>
@@ -188,7 +192,7 @@
             }
 
             // AJAX 요청을 설정합니다.
-            $(".loading-feedback").show();
+            $(".loading-feedback-gpt").show();
 
             $.ajax({
                 url: "/gpt",
@@ -199,13 +203,13 @@
                     text: textToTranslate,
                 },
                 success: function(response) {
-                    $(".loading-feedback").hide();
+                    $(".loading-feedback-gpt").hide();
                     console.log("response: ", response);
                     // 번역된 텍스트를 '결과' 텍스트 영역에 출력
                     $("#gptResult").val(response.translatedText);
                 },
                 error: function(xhr, status, error) {
-                    $(".loading-feedback").hide();
+                    $(".loading-feedback-gpt").hide();
                     console.error("번역 오류", status, error);
                 },
             });
