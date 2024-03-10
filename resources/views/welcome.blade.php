@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-6">
                     <h3>결과</h3>
-                    <textarea class="text_area" id="outputText" readonly></textarea>
+                    <textarea class="text_area" id="outputText"></textarea>
                     <button class="btn btn-primary mr-3" id="deepLTranslate">
                         DeepL 번역
                     </button>
@@ -68,11 +68,28 @@
             <div class="row">
                 <div class="col-6 mb-4">
                     <h3>한국어 번역 (DeepL)</h3>
-                    <textarea class="text_area" id="deepLResult" ></textarea>
+                    <textarea class="text_area" id="deepLResult"></textarea>
                 </div>
                 <div class="col-6">
                     <h3>한국어 번역 (ChapGPT)</h3>
-                    <textarea class="text_area" id="gptResult" ></textarea>
+                    <textarea class="text_area" id="gptResult"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 mb-4">
+                    <h3>영어 제거</h3>
+                    <textarea class="text_area" id="removeEnglish"></textarea>
+                    <button class="btn btn-primary" id="removeEnglishBtn">
+                        영어 제거
+                    </button>
+                    <button class="btn btn-primary" id="removeEnglishClear">
+                        Clear
+                    </button>
+                </div>
+                <div class="col-6">
+
                 </div>
             </div>
         </div>
@@ -114,6 +131,10 @@
             });
 
             // Clear 버튼 클릭 시 입력, 출력 텍스트 영역 초기화
+            $("#removeEnglishClear").click(function() {
+                $("#removeEnglish").val("");
+            });
+
             $("#clearText").click(function() {
                 $("#inputText").val("");
                 $("#outputText").val("");
@@ -213,6 +234,21 @@
             //     $("#gptResult").val("번역 중 오류가 발생했습니다.");
             //   },
             // });
+        });
+
+        $("#removeEnglishBtn").click(function() {
+            var text = $('#removeEnglish').val();
+
+            // 각 줄을 검사하여 영어 문자가 포함된 줄을 제거합니다.
+            var lines = text.split('\n'); // 줄바꿈으로 줄을 분리합니다.
+            var filteredLines = lines.filter(function(line) {
+                return !/[a-zA-Z]/.test(line); // 영어 문자가 포함되지 않은 줄만 남깁니다.
+            });
+            var modifiedText = filteredLines.join('\n'); // 남은 줄들을 다시 줄바꿈 문자로 연결합니다.
+
+            // 수정된 텍스트를 다시 textarea에 설정합니다.
+            $('#removeEnglish').val(modifiedText);
+
         });
     </script>
 </body>
