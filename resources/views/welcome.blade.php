@@ -19,7 +19,8 @@
             margin-top: 10px;
         }
 
-        .loading-feedback, .loading-feedback-gpt {
+        .loading-feedback,
+        .loading-feedback-gpt {
             position: fixed;
             /* 고정 위치 */
             top: 50%;
@@ -93,7 +94,11 @@
                     </button>
                 </div>
                 <div class="col-6">
-
+                    {{-- <h3>한국어 자막 바로</h3>
+                    <textarea class="text_area" id="koreanSubtitle"></textarea>
+                    <button class="btn btn-primary" id="directTranslation">
+                        바로 변환
+                    </button> --}}
                 </div>
             </div>
         </div>
@@ -149,8 +154,6 @@
 
             $("#deepLTranslate").click(function() {
                 var textToTranslate = $("#outputText").val();
-                var apiKey = "e9c9b711-a654-4655-b596-5046796f0246:fx";
-                var apiUrl = "https://api-free.deepl.com/v2/translate";
 
                 if (textToTranslate === "") {
                     alert("번역할 텍스트가 없습니다.");
@@ -253,6 +256,37 @@
             // 수정된 텍스트를 다시 textarea에 설정합니다.
             $('#removeEnglish').val(modifiedText);
 
+        });
+
+
+        $("#directTranslation").click(function() {
+            var caption = $("#inputText").val();
+            var korean = $("#deepLResult").val();
+
+            
+            // AJAX 요청을 설정합니다.
+            $(".loading-feedback-gpt").show();
+
+            $.ajax({
+                url: "/translateTotal",
+                type: "POST",
+                data: {
+                    //token
+                    _token: "{{ csrf_token() }}",
+                    caption: caption,
+                    korean: korean,
+                },
+                success: function(response) {
+                    $(".loading-feedback-gpt").hide();
+                    console.log("response: ", response);
+                    // 번역된 텍스트를 '결과' 텍스트 영역에 출력
+                    $("#koreanSubtitle").val(response.koreanSubtitle);
+                },
+                error: function(xhr, status, error) {
+                    $(".loading-feedback-gpt").hide();
+                    console.error("번역 오류", status, error);
+                },
+            });
         });
     </script>
 </body>

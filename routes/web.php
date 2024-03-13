@@ -22,3 +22,4 @@ Route::get('/', function () {
 Route::get('/translate', [HomeController::class, 'translate'])->name('translate');
 Route::post('/deepl', [HomeController::class, 'deepl'])->name('deepl');
 Route::post('/gpt', [HomeController::class, 'gpt'])->name('gpt');
+Route::post('/translateTotal', [HomeController::class, 'translateTotal'])->name('translateTotal');
