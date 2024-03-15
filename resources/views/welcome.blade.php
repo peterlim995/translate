@@ -243,13 +243,29 @@
             // });
         });
 
+        // $("#removeEnglishBtn").click(function() {
+        //     var text = $('#removeEnglish').val();
+
+        //     // 각 줄을 검사하여 영어 문자가 포함된 줄을 제거합니다.
+        //     var lines = text.split('\n'); // 줄바꿈으로 줄을 분리합니다.
+        //     var filteredLines = lines.filter(function(line) {
+        //         return !/[a-zA-Z]/.test(line); // 영어 문자가 포함되지 않은 줄만 남깁니다.
+        //     });
+        //     var modifiedText = filteredLines.join('\n'); // 남은 줄들을 다시 줄바꿈 문자로 연결합니다.
+
+        //     // 수정된 텍스트를 다시 textarea에 설정합니다.
+        //     $('#removeEnglish').val(modifiedText);
+
+        // });
+
         $("#removeEnglishBtn").click(function() {
             var text = $('#removeEnglish').val();
 
-            // 각 줄을 검사하여 영어 문자가 포함된 줄을 제거합니다.
+            // 각 줄을 검사하여 영어와 한국어가 함께 있는 줄만 남깁니다.
             var lines = text.split('\n'); // 줄바꿈으로 줄을 분리합니다.
             var filteredLines = lines.filter(function(line) {
-                return !/[a-zA-Z]/.test(line); // 영어 문자가 포함되지 않은 줄만 남깁니다.
+                return !/[a-zA-Z]/.test(line) || (/[a-zA-Z]/.test(line) && /[가-힣]/.test(
+                line)); // 영어 문자만 포함된 줄은 제거하고, 영어와 한국어가 함께 있는 줄은 남깁니다.
             });
             var modifiedText = filteredLines.join('\n'); // 남은 줄들을 다시 줄바꿈 문자로 연결합니다.
 
@@ -263,7 +279,7 @@
             var caption = $("#inputText").val();
             var korean = $("#deepLResult").val();
 
-            
+
             // AJAX 요청을 설정합니다.
             $(".loading-feedback-gpt").show();
 
