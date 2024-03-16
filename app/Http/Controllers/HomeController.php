@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         // Log::info($text);
 
-        $system_script = "You are an advanced AI assisting with translation.";
+        $system_script = "You are an help translate subtitles for Bible counseling lectures into Korean. Use Christian, biblical counseling terminology and translate it into language that Koreans can understand.";
         $ai_script = "Translate the following text to Korean.";
         $prompt = $text;
 
