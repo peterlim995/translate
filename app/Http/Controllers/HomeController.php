@@ -12,7 +12,7 @@ class HomeController extends Controller
 
     public function translate()
     {
-        return view('testpages.translate');
+        return view('translate');
     }
 
     public function deepl(Request $request)
