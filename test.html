@@ -1,137 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <title>자막 텍스트 처리기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- bootstrap 추가 -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .text_area {
-        width: 100%;
-        height: 300px;
-        margin-top: 10px;
-      }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1 {
+            font-family: 'Merriweather', serif;
+        }
     </style>
-  </head>
-  <body>
-    <div class="mt-5">
-      <div class="container mb-4">
-        <div class="row">
-          <div class="col-6 mb-4">
-            <h3>자막 텍스트 입력</h3>
-            <textarea
-              class="text_area"
-              id="inputText"
-              placeholder="여기에 자막 텍스트를 붙여넣으세요."
-            ></textarea>
-            <button class="btn btn-primary" id="processText">
-              텍스트 처리
-            </button>
-          </div>
-          <div class="col-6">
-            <h3>결과</h3>
-            <textarea class="text_area" id="outputText" readonly></textarea>
-            <button class="btn btn-primary mr-3" id="deepLTranslate">
-              DeepL 번역
-            </button>
-            <button class="btn btn-primary" id="gptTranslate">
-              ChapGpt 번역
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-6 mb-4">
-            <h3>한국어 번역 (DeepL)</h3>
-            <textarea class="text_area" id="deepLResult" readonly></textarea>
-          </div>
-          <div class="col-6">
-            <h3>한국어 번역 (ChapGPT)</h3>
-            <textarea class="text_area" id="gptResult" readonly></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#processText").click(function () {
-          var inputText = $("#inputText").val();
-          // 숫자, 시간 표시 및 화살표 부분을 제거
-          var processedText = inputText.replace(
-            /^\d+\n\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\n/gm,
-            ""
-          );
-          // 빈 줄 제거
-          processedText = processedText.replace(/^\s*[\r\n]/gm, "");
-
-          // 문장을 하나로 합치고
-          processedText = processedText.replace(/\n/g, " ");
-
-          // 단어 수가 50개를 넘어가고 마침표가 있을 때 줄바꿈 처리
-          var words = processedText.split(" ");
-          var newProcessedText = "";
-          var wordCount = 0;
-
-          for (var i = 0; i < words.length; i++) {
-            newProcessedText += words[i] + " ";
-            wordCount++;
-
-            // 단어 수가 50을 넘고 마침표(.)로 끝나는 경우 줄바꿈 추가
-            if (wordCount > 50 && words[i].endsWith(".")) {
-              newProcessedText += "\n\n";
-              wordCount = 0; // 단어 수 초기화
-            }
-          }
-
-          $("#outputText").val(newProcessedText.trim());
-        });
-
-        $("#deepLTranslate").click(function () {
-          var textToTranslate = $("#outputText").val();
-          var apiKey = null;
-          var apiUrl = "https://api-free.deepl.com/v2/translate";
-
-          if (textToTranslate === "") {
-            alert("번역할 텍스트가 없습니다.");
-            return;
-          }
-
-          $.ajax({
-            url: apiUrl,
-            type: "POST",
-            data: {
-              auth_key: apiKey,
-              text: textToTranslate,
-              target_lang: "KO", // 한국어로 번역
-            },
-            success: function (response) {
-              console.log(response);
-              // 번역된 텍스트를 '결과' 텍스트 영역에 출력
-              $("#deepLResult").val(response.translations[0].text);
-            },
-            error: function (xhr, status, error) {
-              console.error("번역 오류", status, error);
-            },
-          });
-        });
-      });
-
-      $("#gptTranslate").click(function () {
-        var textToTranslate = $("#outputText").val();
-        
-        
-      });
-    </script>
-  </body>
+</head>
+<body>
+    <h1>Test Merriweather Font</h1>
+    <p>Test Roboto Font</p>
+</body>
 </html>
