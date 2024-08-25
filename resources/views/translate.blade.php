@@ -75,9 +75,9 @@
             $(document).ready(function() {
                 $("#processText").click(function() {
                     var inputText = $("#inputText").val();
-                    // 숫자, 시간 표시 및 화살표 부분을 제거
+                    // 숫자, 시간 표시 및 화살표 부분을 제거 (빈 줄도 포함하여 처리)
                     var processedText = inputText.replace(
-                        /^\d+\n\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\n/gm,
+                        /^\d+\s*\n\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\s*\n/gm,
                         ""
                     );
                     // 빈 줄 제거
